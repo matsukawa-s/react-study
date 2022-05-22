@@ -1,7 +1,22 @@
-export const jobList: string[] = [
-    "エンジニア",
-    "美容師",
-    "公務員",
-    "料理人",
-    "研究者"
+import {CheckBoxProps} from "../components/CheckBoxList";
+
+export const interestsCheckBoxList: CheckBoxProps[] = [
+    {
+        value: "ゲーム"
+    },
+    {
+        value: "プログラミング"
+    },
+    {
+        value: "ショッピング"
+    },
+    {
+        value: "カフェ巡り"
+    },
+    {
+        value: "映画鑑賞"
+    },
+    {
+        value: "ドライブ"
+    },
 ];

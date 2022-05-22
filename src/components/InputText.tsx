@@ -1,20 +1,22 @@
 import React, {ChangeEventHandler, FocusEventHandler} from "react";
-import {Chip, FormHelperText, Grid, InputLabel, OutlinedInput, OutlinedTextFieldProps, TextField} from "@mui/material";
+import {
+    Chip,
+    FormHelperText,
+    Grid,
+    InputLabel,
+    OutlinedInput,
+    OutlinedTextFieldProps,
+    TextField,
+    TextFieldProps
+} from "@mui/material";
 
-export type InputTextProps = {
+export type InputTextProps = Omit<TextFieldProps, 'name'> & {
     placeholder?: string,
     error?: string,
 };
 
 // view
-const InputText = (
-    props: InputTextProps & {
-        inputRef: OutlinedTextFieldProps['ref'],
-        value: string;
-        onChange: ChangeEventHandler<HTMLTextAreaElement>;
-        onBlur: FocusEventHandler<HTMLTextAreaElement>;
-    }
-) => {
+const InputText = (props: InputTextProps) => {
     const {
         placeholder,
         error,

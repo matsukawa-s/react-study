@@ -1,10 +1,6 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {
-    Box,
-    Button,
-    Typography
-} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import FInputText from "./FInputText";
@@ -16,11 +12,12 @@ import FInputSelect from "./FInputSelect";
 import CheckBoxList, {CheckBoxProps} from "./CheckBoxList";
 import FInputNumber from "./FInputNumber";
 
-type UserInputs = {
+export type UserInputs = {
     userId: string,
     mail: string,
-    age: number,
-    gender: number,
+    age: number | null,
+    // UserType.Gender
+    gender: number | null,
     job: string,
     interests: string[]
 };
@@ -32,7 +29,16 @@ const UserCreateHookForm: React.VFC = () => {
         control,
         setValue,
         getValues
-    } = useForm<UserInputs>();
+    } = useForm<UserInputs>({
+        defaultValues:{
+            userId: "",
+            mail: "",
+            age: null,
+            gender: null,
+            job: "",
+            interests: []
+        }
+    });
 
     const genderRadioGroupValues: InputRadioProps[] = [
         {
@@ -94,13 +100,11 @@ const UserCreateHookForm: React.VFC = () => {
     ];
 
     const onSubmit: SubmitHandler<UserInputs> = async (data) => {
-        console.log(data);
-        console.log(data.interests);
         try{
             const res = await axios.post("http://localhost:3001/users",{
                 user_id: data.userId,
                 mail: data.mail,
-                age: Number(data.gender),
+                age: Number(data.age),
                 gender: Number(data.gender),
                 job: data.job,
                 interests: data.interests
@@ -121,7 +125,7 @@ const UserCreateHookForm: React.VFC = () => {
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputWithTopLabel label="ユーザID" sx={{ mb: 2 }} needInput>
-                    <FInputText name="userId" placeholder="半角英数字で入力してください。" control={control} />
+                    <FInputText name="userId" control={control} />
                 </InputWithTopLabel>
                 <InputWithTopLabel label="メールアドレス" sx={{ mb: 2 }} needInput>
                     <FInputText name="mail" control={control} />
@@ -144,7 +148,7 @@ const UserCreateHookForm: React.VFC = () => {
                         control={control}
                     />
                 </InputWithTopLabel>
-                {/*<TextField type={"number"} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />*/}
+
                 <Box>
                     <Button type="submit" variant="contained" style={{ minWidth: "120px" }}>登録</Button>
                 </Box>

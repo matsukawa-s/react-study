@@ -1,29 +1,35 @@
 import React from "react";
-import InputText, { InputTextProps } from "./InputText";
+import InputText from "./InputText";
 import {
-  FieldValues,
-  useController,
-  UseControllerProps,
+  Control,
+  Controller,
 } from "react-hook-form";
 
-export type FInputTextProps<T> = InputTextProps & UseControllerProps<T>;
+export type FInputTextProps =  & {
+    name: string,
+    control: Control<any>
+};
 
 // react-hook-form
-const FInputText = <T extends FieldValues>(props: FInputTextProps<T>) =>{
-  const { name, control, ...other } = props;
-  const {
-    field: { ref, ...rest },
-    fieldState: { error },
-  } = useController<T>({ name, control });
-
-  return (
-      <InputText
-        inputRef={ref}
-        error={error && error.message}
-        {...rest}
-        {...other}
-      />
-  );
+const FInputText = ({
+    name,
+    control,
+    ...rest
+}: FInputTextProps) =>{
+    return (
+        <Controller
+            name={name}
+            control={control}
+            render={({ field: { value, onChange, onBlur } }) =>
+                <InputText
+                    {...rest}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            }
+        />
+    );
 };
 
 export default FInputText;

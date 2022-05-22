@@ -21,6 +21,7 @@ const InputSelect = (
     const {
         error,
         definition,
+        value
     } = props;
 
     return (
@@ -29,10 +30,11 @@ const InputSelect = (
             <Select
                 {...props}
                 fullWidth
+                // defaultValue={value}
             >
                 {
                     definition.map((x, index) =>
-                        <MenuItem key={index} value={x.value}>
+                        <MenuItem key={index} value={x.value} selected={x.value == value}>
                             {x.display}
                         </MenuItem>
                     )

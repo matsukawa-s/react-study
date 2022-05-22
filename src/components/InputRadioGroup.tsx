@@ -45,12 +45,6 @@ const InputRadioGroup = (
             <RadioGroup
                 row
                 ref={inputRef}
-                // onChange={(e) => {
-                //     const val = parseInt(e.target.value)
-                //     if (!isNaN(val)) {
-                //         onChange(val);
-                //     }
-                // }}
                 onChange={onChange}
                 onBlur={onBlur}
                 placeholder={placeholder}

@@ -45,28 +45,25 @@ const CheckBoxList = <T extends FieldValues>(
     return (
         <>
             {/* 入力 */}
-            <FormGroup row>
-                <Controller
-                    name={name}
-                    control={control}
-                    render={({ field }) =>(
-                        <>
-                            {
-                                definition.map((x) =>
-                                    <FormControlLabel
-                                        key={x.value}
-                                        control={<Checkbox />}
-                                        label={x.value}
-                                        onChange={(event) =>
-                                            field.onChange(handleCheck(event, x))
-                                        }
-                                    />)
-                            }
-                        </>
-                    )}
-                />
-
-            </FormGroup>
+            <Controller
+                name={name}
+                control={control}
+                render={({ field }) =>(
+                    <FormGroup row>
+                        {
+                            definition.map((x) =>
+                                <FormControlLabel
+                                    key={x.value}
+                                    control={<Checkbox value={x.value} checked={field.value.includes(x.value)} />}
+                                    label={x.value}
+                                    onChange={(event) =>
+                                        field.onChange(handleCheck(event, x))
+                                    }
+                                />)
+                        }
+                    </FormGroup>
+                )}
+            />
             {/* エラーメッセージ */}
             {/*{error && <FormHelperText error>{error}</FormHelperText>}*/}
         </>

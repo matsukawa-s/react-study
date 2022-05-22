@@ -19,8 +19,24 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {jobList} from "../constants/jobList";
-import {interestsList} from "../constants/interestsList";
+
+export const jobList: string[] = [
+    "エンジニア",
+    "美容師",
+    "公務員",
+    "料理人",
+    "研究者"
+];
+
+export const interestsList: string[] = [
+    "ゲーム",
+    "プログラミング",
+    "ショッピング",
+    "カフェ巡り",
+    "映画鑑賞",
+    "ドライブ"
+];
+
 
 const UserCreateForm: React.VFC = () => {
     const navigate = useNavigate();

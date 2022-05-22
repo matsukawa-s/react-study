@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserPage from "./components/pages/UserPage";
 import UserCreatePage from "./components/pages/UserCreatePage";
+import UserEditPage from "./components/pages/UserEditPage";
 
 const rootElement = document.getElementById("root");
 render(
@@ -15,6 +16,7 @@ render(
         <Route path="/" element={<App />} />
         <Route path="users" element={<UserPage />} />
         <Route path="users/create" element={<UserCreatePage />} />
+        <Route path="users/:id/edit" element={<UserEditPage />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
